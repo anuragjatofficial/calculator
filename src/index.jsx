@@ -74,125 +74,127 @@ function Calculator(){
    
 
     return (
-      <div className="flex justify-center flex-col items-center h-screen">
-        <div id="display">{value}</div>
-        <div id="calculator" className="grid grid-cols-4 gap-2 w-1/2">
+      <div className="flex justify-center flex-col items-center h-screen bg-black">
+        <div id="calculator" className="grid grid-cols-4 gap-2">
+          <div id="display" className="bg-white text-center py-3 px-3">
+            {value}
+          </div>
           {/* buttons here */}
           <div
             id="clear"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={handleReset}
           >
             AC
           </div>
           <div
             id="divide"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             /
           </div>
           <div
             id="multiply"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             X
           </div>
           <div
             id="seven"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             7
           </div>
           <div
             id="eight"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             8
           </div>
           <div
             id="nine"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             9
           </div>
           <div
             id="subtract"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             -
           </div>
           <div
             id="four"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             4
           </div>
           <div
             id="five"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             5
           </div>
           <div
             id="six"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             6
           </div>
           <div
             id="add"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             +
           </div>
           <div
             id="one"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             1
           </div>
           <div
             id="two"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             2
           </div>
           <div
             id="three"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             3
           </div>
           <div
             id="equals"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={calculate}
           >
             =
           </div>
           <div
             id="zero"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             0
           </div>
           <div
             id="decimal"
-            className="bg-gray-700 text-center py-2 click"
+            className="bg-gray-700 text-center py-3 px-3 click"
             onClick={(e) => handleInput(e)}
           >
             .
