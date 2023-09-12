@@ -8,73 +8,74 @@ function App() {
 }
 
 function Calculator(){
-    const style = {
-        
-    };
-    const [value, setValue] = React.useState('0');
-    const [isFirstValue, setIsFirstValue] = React.useState(true);
-    const [nextValue, setNextValue] = React.useState('0');
-    const [operator, setOperator] = React.useState('');
-    const handleCalcuation = (op)=>{
-        switch (op) {
-          case "/":
-            setIsFirstValue(!isFirstValue);
-            setOperator("/");
-            break;
-
-          case "X":
-            setIsFirstValue(!isFirstValue);
-            setOperator("X");
-            break;
-
-          case "-":
-            setIsFirstValue(!isFirstValue);
-            setOperator("-");
-            break;
-          case "+":
-            setIsFirstValue(!isFirstValue);
-            setOperator("+");
-            break;
-          case "=":
-            console.log(operator);
-            switch (operator) {
-              case "X":
-                document.getElementById("display").innerHTML = (
-                  +value * +nextValue
-                );
-                setValue(((+value)*(+nextValue)));
-                break;
-              case "/":
-                document.getElementById("display").innerHTML = (
-                  +value / +nextValue
-                );
-                setValue(((+value)/(+nextValue)));
-                break;
-              case "-":
-                document.getElementById("display").innerHTML = (
-                  +value - +nextValue
-                );
-                setValue(((+value)-(+nextValue)));
-                break;
-              case "+":
-                document.getElementById("display").innerHTML = (
-                  +value + +nextValue
-                );
-                setValue(((+value)+(+nextValue)));
-                break;
-            }
-            break;
-        }
-    };
+    const [value, setValue] = React.useState("0");
 
     const handleReset = ()=>{
         setValue('0');
-        setNextValue('0');
     };
+
+    const calculate = ()=>{
+      if(notSingleNumber()){
+        let ans  = value.replace("X","*");
+        let res = eval(ans);
+        document.getElementById("display").innerHTML = res;
+        setValue(res);
+      }
+    };
+
+    const notSingleNumber = () =>{
+      for(let i = 0;i<value.length;i++){
+        if (
+          value[i] === "/" ||
+          value[i] === "-" ||
+          value[i] === "+" ||
+          value[i] === "X"
+        ) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    const handleInput = (e)=>{
+
+      if (
+        value === "0" &&
+        e.target.innerHTML !== "/" &&
+        e.target.innerHTML !== "X" &&
+        e.target.innerHTML !== "-" &&
+        e.target.innerHTML !== "+"
+      ) {
+        setValue(e.target.innerHTML);
+      } else if (
+        ((value[value.length - 1] === "/" ||
+          value[value.length - 1] === "X" ||
+          value[value.length - 1] === "-" ||
+          value[value.length - 1] === "+") &&
+        (e.target.innerHTML === "/" ||
+          e.target.innerHTML === "+" ||
+          e.target.innerHTML === "-" ||
+          e.target.innerHTML === "X")) || (value[value.length - 1] === "." && e.target.innerHTML===".")
+      ) {
+        setValue(removeLast(value) + e.target.innerHTML);
+      } else {
+        setValue(value + e.target.innerHTML);
+      }
+    };
+
+    const removeLast = (str)=>{
+      let st = "";
+      for(let i = 0;i<str.length-1;i++){
+        st+=str[i];
+      }
+      return st;
+    };
+
+   
 
     return (
       <div className="flex justify-center flex-col items-center h-screen">
-        <div id="display">{isFirstValue ? (+value) : (+nextValue)}</div>
+        <div id="display">{value}</div>
         <div id="calculator" className="grid grid-cols-4 gap-2 w-1/2">
           {/* buttons here */}
           <div
@@ -87,152 +88,112 @@ function Calculator(){
           <div
             id="divide"
             className="bg-gray-700 text-center py-2 click"
-            onClick={() => handleCalcuation("/")}
+            onClick={(e) => handleInput(e)}
           >
             /
           </div>
           <div
             id="multiply"
             className="bg-gray-700 text-center py-2 click"
-            onClick={() => handleCalcuation("X")}
+            onClick={(e) => handleInput(e)}
           >
             X
           </div>
           <div
             id="seven"
-            onClick={(prev) =>
-              isFirstValue
-                ? setValue(value + "7")
-                : setNextValue(nextValue + "7")
-            }
             className="bg-gray-700 text-center py-2 click"
+            onClick={(e) => handleInput(e)}
           >
             7
           </div>
           <div
             id="eight"
             className="bg-gray-700 text-center py-2 click"
-            onClick={(prev) =>
-              isFirstValue
-                ? setValue(value + "8")
-                : setNextValue(nextValue + "8")
-            }
+            onClick={(e) => handleInput(e)}
           >
             8
           </div>
           <div
             id="nine"
             className="bg-gray-700 text-center py-2 click"
-            onClick={(prev) =>
-              isFirstValue
-                ? setValue(value + "9")
-                : setNextValue(nextValue + "9")
-            }
+            onClick={(e) => handleInput(e)}
           >
             9
           </div>
           <div
             id="subtract"
             className="bg-gray-700 text-center py-2 click"
-            onClick={() => handleCalcuation("-")}
+            onClick={(e) => handleInput(e)}
           >
             -
           </div>
           <div
             id="four"
             className="bg-gray-700 text-center py-2 click"
-            onClick={(prev) =>
-              isFirstValue
-                ? setValue(value + "4")
-                : setNextValue(nextValue + "4")
-            }
+            onClick={(e) => handleInput(e)}
           >
             4
           </div>
           <div
             id="five"
             className="bg-gray-700 text-center py-2 click"
-            onClick={(prev) =>
-              isFirstValue
-                ? setValue(value + "5")
-                : setNextValue(nextValue + "5")
-            }
+            onClick={(e) => handleInput(e)}
           >
             5
           </div>
           <div
             id="six"
             className="bg-gray-700 text-center py-2 click"
-            onClick={(prev) =>
-              isFirstValue
-                ? setValue(value + "6")
-                : setNextValue(nextValue + "6")
-            }
+            onClick={(e) => handleInput(e)}
           >
             6
           </div>
           <div
             id="add"
             className="bg-gray-700 text-center py-2 click"
-            onClick={() => handleCalcuation("+")}
+            onClick={(e) => handleInput(e)}
           >
             +
           </div>
           <div
             id="one"
             className="bg-gray-700 text-center py-2 click"
-            onClick={(prev) =>
-              isFirstValue
-                ? setValue(value + "1")
-                : setNextValue(nextValue + "1")
-            }
+            onClick={(e) => handleInput(e)}
           >
             1
           </div>
           <div
             id="two"
             className="bg-gray-700 text-center py-2 click"
-            onClick={(prev) =>
-              isFirstValue
-                ? setValue(value + "2")
-                : setNextValue(nextValue + "2")
-            }
+            onClick={(e) => handleInput(e)}
           >
             2
           </div>
           <div
             id="three"
             className="bg-gray-700 text-center py-2 click"
-            onClick={(prev) =>
-              isFirstValue
-                ? setValue(value + "3")
-                : setNextValue(nextValue + "3")
-            }
+            onClick={(e) => handleInput(e)}
           >
             3
           </div>
           <div
             id="equals"
             className="bg-gray-700 text-center py-2 click"
-            onClick={() => handleCalcuation("=")}
+            onClick={calculate}
           >
             =
           </div>
           <div
             id="zero"
             className="bg-gray-700 text-center py-2 click"
-            onClick={(prev) =>
-              isFirstValue
-                ? setValue(value + "0")
-                : setNextValue(nextValue + "0")
-            }
+            onClick={(e) => handleInput(e)}
           >
             0
           </div>
           <div
             id="decimal"
             className="bg-gray-700 text-center py-2 click"
-            onClick={(prev) => value[value.length-1!=='.'] ? setValue(value + "."): setValue}
+            onClick={(e) => handleInput(e)}
           >
             .
           </div>
